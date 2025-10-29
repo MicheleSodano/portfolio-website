@@ -4,8 +4,9 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Shield } from 'lucide-react';
 import { config } from '@/lib/config';
+import { security } from '@/lib/security';
 
 interface ContactProps {
   email: string;
@@ -24,19 +25,42 @@ export function Contact({ email, phone, location, social }: ContactProps) {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'validation'>('idle');
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setValidationErrors([]);
+
+    // Rate limiting check
+    if (!security.checkRateLimit()) {
+      setSubmitStatus('error');
+      setValidationErrors(['Please wait 30 seconds before sending another message']);
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validate and sanitize form data
+    const validation = security.validateFormData(formData);
+    
+    if (!validation.isValid) {
+      setSubmitStatus('validation');
+      setValidationErrors(validation.errors);
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Use sanitized data for submission
+    const sanitizedData = validation.sanitizedData;
 
     // If Formspree is not configured, use mailto fallback
     if (config.formspree.formId === 'YOUR_FORM_ID') {
       const mailtoUrl = config.contact.fallbackMailto(
-        formData.name,
-        formData.email,
-        formData.message
+        sanitizedData.name,
+        sanitizedData.email,
+        sanitizedData.message
       );
       window.location.href = mailtoUrl;
       setIsSubmitting(false);
@@ -51,10 +75,10 @@ export function Contact({ email, phone, location, social }: ContactProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          _replyto: formData.email, // This tells Formspree to use this as reply-to
+          name: sanitizedData.name,
+          email: sanitizedData.email,
+          message: sanitizedData.message,
+          _replyto: sanitizedData.email, // This tells Formspree to use this as reply-to
         }),
       });
 
@@ -73,9 +97,25 @@ export function Contact({ email, phone, location, social }: ContactProps) {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    
+    // Clear validation errors when user starts typing
+    if (validationErrors.length > 0) {
+      setValidationErrors([]);
+      setSubmitStatus('idle');
+    }
+    
+    // Basic real-time sanitization (allow typing but prevent obvious attacks)
+    let sanitizedValue = value;
+    
+    // Remove script tags and javascript: protocols in real-time
+    sanitizedValue = sanitizedValue
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/javascript:/gi, '');
+    
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: sanitizedValue
     }));
   };
 
@@ -240,6 +280,20 @@ export function Contact({ email, phone, location, social }: ContactProps) {
                   {submitStatus === 'error' && (
                     <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-800 dark:text-red-200">
                       ❌ Failed to send message. Please try again or email me directly.
+                    </div>
+                  )}
+                  
+                  {submitStatus === 'validation' && validationErrors.length > 0 && (
+                    <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg text-yellow-800 dark:text-yellow-200">
+                      <div className="flex items-center mb-2">
+                        <Shield className="h-4 w-4 mr-2" />
+                        <span className="font-medium">Security Validation Failed</span>
+                      </div>
+                      <ul className="text-sm space-y-1">
+                        {validationErrors.map((error, index) => (
+                          <li key={index}>• {error}</li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                   
