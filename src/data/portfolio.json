@@ -1,0 +1,238 @@
+{
+  "personal": {
+    "name": "Michele Sodano",
+    "role": "AI Engineer | Data Scientist | Research ML Engineer",
+    "tagline": "Building intelligent, explainable, and responsible systems that merge creativity and logic",
+    "bio": "Engineer and **applied researcher** with over six years of interdisciplinary experience in **AI**, **data science**, and **computational modeling**, shaped across **Europe, Asia, and the U.S.**\n\nMy work bridges **AI research and real-world application**, spanning **generative AI** (GANs, VAEs, segmentation, 3D synthesis), **time-series forecasting**, **surrogate modeling**, and **trustworthy AI** for privacy-preserving analytics.\n\nI started working with **AI, data, and computational modeling** driven by the curiosity to understand how technology could become a **tool to improve reality**, not just to automate it. Over the years, this curiosity has evolved into a passion for building intelligent, explainable, and responsible systems that merge creativity and logic.\n\nI've **designed and deployed ML/DL models** for occupancy detection, energy forecasting, and privacy threat assessment, and explored **LLM orchestration** and **multimodal agents** for IoT data analysis — proposing **data obfuscation** and **differential privacy** strategies to strengthen cybersecurity.\n\nProficient in **Python (PyTorch, TensorFlow, scikit-learn)** and modern **data pipelines**, I combine theoretical insight with hands-on implementation, delivering models that are **interpretable, efficient, and impactful**.\n\nBeyond data and algorithms, my work is deeply about **people** and **collaboration**. The principles that guide me every day are:\n\n- **Transparent feedback** as a foundation for growth,\n- **Mentoring and shared learning**, and\n- **Collaborative problem-solving** as a driver of innovation.\n\nI'm always open to **collaborations and applied research opportunities** where technology meets impact — bridging the gap between **innovation** and **everyday life**.",
+    "location": "Milano, Italia (Open to relocation within EU)",
+    "email": "mikysodano@gmail.com",
+    "phone": "(+39) 3315807320",
+    "website": "https://michelesodano.dev",
+    "avatar": "/images/avatar.jpg"
+  },
+  "social": {
+    "github": "https://github.com/michelesodano",
+    "linkedin": "https://www.linkedin.com/in/michele-sodano/"
+  },
+  "skills": {
+    "primary": [
+      "Python (Advanced)",
+      "PyTorch/TensorFlow",
+      "scikit-learn",
+      "Pandas/NumPy/SciPy",
+      "Docker/Git",
+      "SQL/ETL Pipelines"
+    ],
+    "secondary": [
+      "HuggingFace/LangChain",
+      "OpenCV/Computer Vision",
+      "FastAPI/RESTful APIs",
+      "EnergyPlus/Building Simulation",
+      "Arduino/Raspberry Pi",
+      "CUDA/GPU Computing"
+    ]
+  },
+  "categories": [
+    {
+      "title": "AI & Machine Learning",
+      "description": "Deep learning architectures: CNN, LSTM/GRU, Seq2Seq, Transformers, GAN, VAE. Model explainability (SHAP), GPU computing (CUDA)",
+      "icon": "code"
+    },
+    {
+      "title": "Data Science & Analytics",
+      "description": "ETL pipelines, statistical analysis, hypothesis testing, time-series forecasting, signal processing (OpenCV)",
+      "icon": "search"
+    },
+    {
+      "title": "Generative & LLM",
+      "description": "Fine-tuning transformers (LoRA, QLoRA), RAG & Agentic AI (LangChain, LlamaIndex), prompt engineering",
+      "icon": "palette"
+    },
+    {
+      "title": "IoT & Simulation",
+      "description": "Building energy simulation, smart-building analytics, IoT prototyping, multi-sensor integration",
+      "icon": "users"
+    }
+  ],
+  "projects": [
+    {
+      "id": "inference-attacks",
+      "title": "Inference Attacks on Smart Buildings",
+      "description": "Lead – Privacy & ML: Built Python pipeline for IoT time-series analysis and privacy protection",
+      "problem": "Smart building IoT systems vulnerable to privacy inference attacks through occupancy detection",
+      "solution": "Built Python pipeline (Pandas/NumPy/sklearn) for 1‑min IoT time‑series, modeled occupancy via affine thermal model + supervised/unsupervised ML",
+      "results": [
+        "Proposed obfuscation & differential privacy to reduce leakage",
+        "Developed privacy-aware ML models",
+        "Published research on trustworthy AI"
+      ],
+      "technologies": ["Python", "scikit-learn", "PyTorch", "Jupyter", "Docker"],
+      "links": {
+        "github": "#"
+      },
+      "image": "/images/projects/inference-attacks.jpg",
+      "featured": true
+    },
+    {
+      "id": "surrogate-models",
+      "title": "Surrogate Models for Energy Simulation",
+      "description": "Research – DL Forecasting: Automated energy simulation with deep learning for real-time design feedback",
+      "problem": "Traditional energy simulation tools too slow for iterative design processes",
+      "solution": "Automated >15k EnergyPlus runs (Rhino/Grasshopper/Honeybee), trained GRU/Seq2Seq/1D‑CNN for hourly cooling‑load prediction",
+      "results": [
+        ">90% runtime reduction vs. full simulation",
+        "Real‑time design feedback enabled",
+        "Automated 15k+ simulation runs"
+      ],
+      "technologies": ["PyTorch", "EnergyPlus", "Grasshopper", "NumPy"],
+      "links": {
+        "github": "#"
+      },
+      "image": "/images/projects/surrogate-models.jpg",
+      "featured": true
+    },
+    {
+      "id": "generative-ai-architecture",
+      "title": "Generative AI for Architectural Design",
+      "description": "Applied Research – CV/Generative: AI-powered design tools for architectural synthesis and segmentation",
+      "problem": "Traditional architectural design workflows lack AI-assisted creative tools",
+      "solution": "Trained 3D‑GANs, cGANs, U‑Nets for 2D/3D synthesis & segmentation, image‑to‑geometry pipelines with OpenCV + TensorFlow",
+      "results": [
+        "Co‑instructor @ DigitalFUTURES",
+        "Mentored 40+ participants",
+        "Advanced generative design workflows"
+      ],
+      "technologies": ["TensorFlow", "Keras", "OpenCV", "PyTorch"],
+      "links": {
+        "github": "#"
+      },
+      "image": "/images/projects/generative-ai.jpg",
+      "featured": true
+    }
+  ],
+  "experience": [
+    {
+      "id": "postdoc-utsa",
+      "title": "AI Engineer | Research ML Engineer | Lab Manager",
+      "company": "University of Texas at San Antonio",
+      "location": "San Antonio, TX, USA",
+      "period": {
+        "start": "2024-05",
+        "end": "2025-06"
+      },
+      "description": "Applied AI and data science to smart-building analytics, developing models for occupancy detection, energy pattern forecasting, and privacy-preserving inference (SentinelHive Lab)",
+      "achievements": [
+        "Built Python-based ETL pipelines for high-resolution IoT datasets",
+        "Designed ML/DL models (RandomForest, XGBoost, LSTM, CNN) for energy forecasting",
+        "Explored LangChain RAG multimodal agents for privacy attack simulation",
+        "Managed lab operations and supervised MSc/PhD research activities"
+      ],
+      "technologies": ["Python", "PyTorch", "scikit-learn", "LangChain", "Docker"]
+    },
+    {
+      "id": "phd-researcher",
+      "title": "Data Scientist | AI Researcher | Computational Designer",
+      "company": "Singapore University of Technology and Design",
+      "location": "Singapore",
+      "period": {
+        "start": "2019-01",
+        "end": "2024-02"
+      },
+      "description": "Applied machine learning, deep learning, and parametric modeling to architectural design and building performance optimization (Artificial Architecture Lab, AIRLAB)",
+      "achievements": [
+        "Developed surrogate models reducing EnergyPlus simulation runtime by >90%",
+        "Trained generative AI models (GAN, cGAN, VAE, U-Net) for architectural design",
+        "Awarded SUTD President's Graduate Fellowship (2019–2024)",
+        "Mentored MSc students and supported AI for design courses"
+      ],
+      "technologies": ["PyTorch", "TensorFlow", "EnergyPlus", "Grasshopper", "OpenCV"]
+    },
+    {
+      "id": "rd-manager",
+      "title": "Project Manager | R&D",
+      "company": "Saimex S.r.l.",
+      "location": "Seregno (MB), Italia",
+      "period": {
+        "start": "2018-08",
+        "end": "2018-12"
+      },
+      "description": "Managed R&D for structural GFRP façade systems using pultrusion manufacturing for Middle East skyscrapers",
+      "achievements": [
+        "Converted 2D CAD workflows to parametric 3D modeling",
+        "Cut design iteration time by 60%",
+        "Supervised FEM analysis and ISO/ASTM compliance"
+      ],
+      "technologies": ["Grasshopper", "Rhino", "Python", "FEM Analysis"]
+    },
+    {
+      "id": "site-coordinator",
+      "title": "Site Coordinator | Technical Services",
+      "company": "O.B. Technical Service Ltd.",
+      "location": "Gulu, Uganda",
+      "period": {
+        "start": "2016-10",
+        "end": "2017-02"
+      },
+      "description": "Led design and coordination of hotel and restaurant facilities, combining energy engineering and on-site management",
+      "achievements": [
+        "Conducted 3D as-built surveys and redesigned MEP systems",
+        "Implemented solar PV + thermal systems, improving energy efficiency by 25%",
+        "Supervised over 50 workers ensuring schedule and quality compliance"
+      ],
+      "technologies": ["3D Surveying", "MEP Design", "Solar Systems", "Project Management"]
+    }
+  ],
+  "education": [
+    {
+      "id": "phd-architecture",
+      "degree": "Ph.D. in Architecture & Sustainable Design",
+      "institution": "Singapore University of Technology and Design (SUTD)",
+      "location": "Singapore",
+      "period": {
+        "start": "2019-01",
+        "end": "2024-02"
+      },
+      "grade": "Honours with Highest Distinction (CGPA 4.67/5)",
+      "scholarship": "SUTD President's Graduate Fellowship (2019–2024)",
+      "thesis": "Advancing Energy-Efficient Building Design through Deep Learning Surrogate Models",
+      "specialization": "Computing and Information Sciences",
+      "achievements": [
+        "SUTD President's Graduate Fellowship (2019–2024)",
+        "SG Mark 2020 Award (Time Capsule Project)"
+      ]
+    },
+    {
+      "id": "msc-building-engineering",
+      "degree": "MSc Building Engineering",
+      "institution": "Politecnico di Milano",
+      "location": "Milano, Italia",
+      "period": {
+        "start": "2014-09",
+        "end": "2017-07"
+      },
+      "grade": "110/110",
+      "scholarship": "Tesi all'Estero Scholarship (2016)",
+      "thesis": "Feasibility Study of Renewable Air-Conditioning for Lacor Hospital Operating Theatres",
+      "achievements": [
+        "Tesi all'Estero Scholarship recipient",
+        "Specialized in energy systems and sustainable design with focus on computational modeling and simulation"
+      ]
+    },
+    {
+      "id": "bsc-building-engineering",
+      "degree": "BSc Building Engineering",
+      "institution": "Politecnico di Milano",
+      "location": "Milano, Italia",
+      "period": {
+        "start": "2011-09",
+        "end": "2014-07"
+      },
+      "grade": "94/110",
+      "thesis": "Energy Optimization of the Building Envelope of a Particular Case Study through the Analysis and Comparison of Three Different Technological Solutions of Opaque Wall",
+      "achievements": [
+        "CENED Energy Certifier License (2013)",
+        "Strong foundation in engineering principles"
+      ]
+    }
+  ]
+}

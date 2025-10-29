@@ -1,0 +1,206 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
+
+interface ContactProps {
+  email: string;
+  phone?: string;
+  location: string;
+  social: {
+    github: string;
+    linkedin: string;
+  };
+}
+
+export function Contact({ email, phone, location, social }: ContactProps) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically send the form data to your backend
+    console.log('Form submitted:', formData);
+    // For now, we'll just create a mailto link
+    const subject = encodeURIComponent(`Messaggio da ${formData.name}`);
+    const body = encodeURIComponent(`${formData.message}\n\n---\nInviato da: ${formData.name}\nEmail: ${formData.email}`);
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  return (
+    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Let's Get In Touch</h2>
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+            Have a project in mind or just want to chat? 
+            I'd love to hear from you!
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <Card>
+              <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Mail className="h-5 w-5 mr-2" />
+                    Contact Information
+                  </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center">
+                  <Mail className="h-4 w-4 mr-3 text-foreground/60" />
+                  <a 
+                    href={`mailto:${email}`}
+                    className="text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    {email}
+                  </a>
+                </div>
+                {phone && (
+                  <div className="flex items-center">
+                    <Phone className="h-4 w-4 mr-3 text-foreground/60" />
+                    <a 
+                      href={`tel:${phone}`}
+                      className="text-foreground/80 hover:text-foreground transition-colors"
+                    >
+                      {phone}
+                    </a>
+                  </div>
+                )}
+                <div className="flex items-center">
+                  <MapPin className="h-4 w-4 mr-3 text-foreground/60" />
+                  <span className="text-foreground/80">{location}</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                  <CardTitle>Follow Me</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex gap-4">
+                  <a
+                    href={social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center px-4 py-2 border border-foreground/20 rounded-lg hover:bg-foreground/5 transition-colors"
+                  >
+                    <Linkedin className="h-4 w-4 mr-2" />
+                    LinkedIn
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="text-sm text-foreground/60 bg-foreground/5 p-4 rounded-lg">
+              <p className="font-medium mb-2">Privacy & GDPR</p>
+              <p>
+                Your data will be used exclusively to respond to your request 
+                and will not be shared with third parties. You can request deletion 
+                at any time.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <Card>
+              <CardHeader>
+                  <CardTitle>Send a Message</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">
+                      Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-foreground/20 rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/40 transition-colors"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-foreground/20 rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/40 transition-colors"
+                      placeholder="your-email@example.com"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-2">
+                      Message *
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-foreground/20 rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/40 transition-colors resize-none"
+                      placeholder="Tell me about your project or what you'd like to discuss..."
+                    />
+                  </div>
+                  
+                  <Button type="submit" size="lg" className="w-full">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
