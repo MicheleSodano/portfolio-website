@@ -2,9 +2,8 @@
 export const config = {
   // Formspree configuration
   formspree: {
-    // Replace with your actual Formspree form ID after registration
-    // Get this from https://formspree.io after creating a form
-    formId: process.env.NEXT_PUBLIC_FORMSPREE_ID || 'YOUR_FORM_ID',
+    // Formspree form ID from https://formspree.io/f/xkgpbnej
+    formId: process.env.NEXT_PUBLIC_FORMSPREE_ID || 'xkgpbnej',
     endpoint: (formId: string) => `https://formspree.io/f/${formId}`,
   },
   
