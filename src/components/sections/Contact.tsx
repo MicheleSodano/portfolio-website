@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import { config } from '@/lib/config';
 
 interface ContactProps {
   email: string;
@@ -22,15 +23,53 @@ export function Contact({ email, phone, location, social }: ContactProps) {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
-    // For now, we'll just create a mailto link
-    const subject = encodeURIComponent(`Messaggio da ${formData.name}`);
-    const body = encodeURIComponent(`${formData.message}\n\n---\nInviato da: ${formData.name}\nEmail: ${formData.email}`);
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    // If Formspree is not configured, use mailto fallback
+    if (config.formspree.formId === 'YOUR_FORM_ID') {
+      const mailtoUrl = config.contact.fallbackMailto(
+        formData.name,
+        formData.email,
+        formData.message
+      );
+      window.location.href = mailtoUrl;
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      // Use Formspree endpoint from config
+      const response = await fetch(config.formspree.endpoint(config.formspree.formId), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _replyto: formData.email, // This tells Formspree to use this as reply-to
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -191,9 +230,36 @@ export function Contact({ email, phone, location, social }: ContactProps) {
                     />
                   </div>
                   
-                  <Button type="submit" size="lg" className="w-full">
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Message
+                  {/* Status Messages */}
+                  {submitStatus === 'success' && (
+                    <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-200">
+                      ✅ Message sent successfully! I'll get back to you soon.
+                    </div>
+                  )}
+                  
+                  {submitStatus === 'error' && (
+                    <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-800 dark:text-red-200">
+                      ❌ Failed to send message. Please try again or email me directly.
+                    </div>
+                  )}
+                  
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full" 
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4 mr-2" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>
