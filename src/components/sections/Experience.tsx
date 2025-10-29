@@ -28,7 +28,9 @@ interface EducationItem {
     end: string;
   };
   grade?: string;
+  scholarship?: string;
   thesis?: string;
+  specialization?: string;
   achievements?: string[];
 }
 
