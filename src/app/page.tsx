@@ -37,6 +37,7 @@ export default function Home() {
         bio={personal.bio}
         name={personal.name}
         location={personal.location}
+        avatar={personal.avatar}
       />
       
       <Experience

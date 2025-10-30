@@ -2,14 +2,16 @@
 
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/Card';
+import Image from 'next/image';
 
 interface AboutProps {
   bio: string;
   name: string;
   location: string;
+  avatar?: string;
 }
 
-export function About({ bio, name, location }: AboutProps) {
+export function About({ bio, name, location, avatar }: AboutProps) {
   return (
     <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-secondary/30">
       <div className="max-w-4xl mx-auto">
@@ -69,13 +71,26 @@ export function About({ bio, name, location }: AboutProps) {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            {/* Profile Image Placeholder */}
+            {/* Profile Image */}
             <Card>
               <CardContent className="p-6">
-                <div className="aspect-square bg-gradient-to-br from-secondary to-primary/10 rounded-xl flex items-center justify-center mb-4">
-                  <div className="text-6xl font-bold text-primary/60">
-                    {name.split(' ').map(n => n[0]).join('')}
-                  </div>
+                <div className="aspect-square rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-secondary to-primary/10">
+                  {avatar ? (
+                    <Image
+                      src={avatar}
+                      alt={`${name} - Profile Photo`}
+                      width={300}
+                      height={300}
+                      className="w-full h-full object-cover"
+                      priority
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="text-6xl font-bold text-primary/60">
+                        {name.split(' ').map(n => n[0]).join('')}
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="text-center">
                   <h3 className="font-semibold text-lg">{name}</h3>
