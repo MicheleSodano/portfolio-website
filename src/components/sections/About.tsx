@@ -107,25 +107,37 @@ export function About({ bio, name, location, avatar }: AboutProps) {
                   <div className="flex items-start">
                     <span className="w-2 h-2 bg-primary/60 rounded-full mt-2 mr-3 flex-shrink-0" />
                     <span className="text-muted">
-                      Regularly contribute to volunteer and non-profit projects for sustainable development
+                      Coffee enthusiast (essential for debugging!) — not surprising with a brother running a specialty coffee roastery.
                     </span>
                   </div>
                   <div className="flex items-start">
                     <span className="w-2 h-2 bg-primary/60 rounded-full mt-2 mr-3 flex-shrink-0" />
                     <span className="text-muted">
-                      Passionate about backpacking travels and encounters between humanity and culture
+                      Passionate about backpacking and fascinated by the encounters between people, culture, and nature along the way.
                     </span>
                   </div>
                   <div className="flex items-start">
                     <span className="w-2 h-2 bg-primary/60 rounded-full mt-2 mr-3 flex-shrink-0" />
                     <span className="text-muted">
-                      Coffee enthusiast ☕ (essential for debugging!): my brother is a coffee roaster!
+                      Tinker with smart home automations in my free time — experimenting with Home Assistant, Raspberry Pi, and tiny IoT sensors.
                     </span>
                   </div>
                   <div className="flex items-start">
                     <span className="w-2 h-2 bg-primary/60 rounded-full mt-2 mr-3 flex-shrink-0" />
                     <span className="text-muted">
-                      In my free time I experiment with Home Assistant and small IoT projects for smart homes
+                      Supporter of sustainable innovation, contributing to volunteer and non-profit projects focused on environmental and social impact.
+                    </span>
+                  </div>
+                  <div className="flex items-start">
+                    <span className="w-2 h-2 bg-primary/60 rounded-full mt-2 mr-3 flex-shrink-0" />
+                    <span className="text-muted">
+                      Lived and worked across Europe, Asia, and the U.S., developing a global mindset and curiosity for cultural diversity.
+                    </span>
+                  </div>
+                  <div className="flex items-start">
+                    <span className="w-2 h-2 bg-primary/60 rounded-full mt-2 mr-3 flex-shrink-0" />
+                    <span className="text-muted">
+                      Enjoy connecting ideas from different disciplines and believe in balance between analytical precision and creative intuition
                     </span>
                   </div>
                 </div>
